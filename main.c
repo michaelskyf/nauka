@@ -20,10 +20,10 @@
 #include <time.h>
 
 typedef struct {
-	char *x;
-	char *y;
-	char *z;
-	char *pl;
+	union {
+		struct{char *x, *y, *z, *pl;};
+		char *v[4];
+	};
 } record_t;
 
 record_t *array = NULL;
@@ -63,7 +63,7 @@ int main(void)
 int random_word(void)
 {
 	size_t index = random() % asize;
-	short word = random() % 4;
+	short word = 3;//random() % 4;
 	char *w = NULL;
 	char buffer[1024];
 	int failed = 0;
@@ -76,27 +76,25 @@ int random_word(void)
 			i = word;
 		else if(i == word)
 			continue;
+
+		w = array[index].v[i];
 start:
 		switch(i)
 		{
 			case 0:
 				printf("Pierwsze: ");
-				w = array[index].x;
 			break;
 
 			case 1:
 				printf("Drugie: ");
-				w = array[index].y;
 			break;
 
 			case 2:
 				printf("Trzecie: ");
-				w = array[index].z;
 			break;
 
 			case 3:
 				printf("Po polsku: ");
-				w = array[index].pl;
 			break;
 		}
 		if(i == word)
