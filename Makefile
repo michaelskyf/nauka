@@ -1,4 +1,5 @@
 files := main.c
+CFLAGS := -Wall -Werror -Wpedantic
 
 all:
-	gcc -g $(files) -o nauka
+	gcc -g $(files) -o nauka $(CFLAGS)

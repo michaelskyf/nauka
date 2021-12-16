@@ -18,7 +18,7 @@ int words = 0;
 
 void push_record(char *x, char *y, char *z, char *pl);
 void init_array(void);
-void random_word(void);
+int random_word(void);
 
 int main(void)
 {
@@ -27,13 +27,24 @@ int main(void)
 
 	init_array();
 
-	while(1)
-		random_word();
+	while(!random_word())
+	{
+
+	}
+
+	for(int i = 0; i < asize; i++)
+	{
+		free(array[i].x);
+		free(array[i].y);
+		free(array[i].z);
+		free(array[i].pl);
+	}
+	free(array);
 
 	return 0;
 }
 
-void random_word(void)
+int random_word(void)
 {
 	size_t index = random() % asize;
 	short word = random() % 4;
@@ -86,7 +97,7 @@ start:
 		if(strcmp(w, buffer))
 		{
 			if(!strcmp("STOP", buffer))
-				return;
+				return -1;
 			if(!strcmp("HELP", buffer))
 			{
 				printf("%s %s %s %s\n", array[index].x, array[index].y, array[index].z, array[index].pl);
@@ -105,6 +116,8 @@ start:
 	words++;
 
 	printf("Wynik: %d/%d (%d%%)\n\n", score, words, (score * 100)/words);
+
+	return 0;
 }
 
 void init_array(void)
@@ -127,7 +140,7 @@ void init_array(void)
 	{
 		char *h = x;
 		int offset = 0;
-		for(int i = 0; i < 1024; i++)
+		for(int i = 0; i < sizeof(buffer); i++)
 		{
 			while(i < sizeof(buffer) && ((h != pl && buffer[i] != ' ') || h == pl) && buffer[i] != '\0' && buffer[i] != '\n')
 			{
