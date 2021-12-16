@@ -43,6 +43,7 @@ int main(void)
 
 	init_array();
 
+	asize = 30;
 	while(!random_word())
 	{
 
@@ -116,6 +117,11 @@ start:
 			{
 				printf("%s %s %s %s\n", array[index].x, array[index].y, array[index].z, array[index].pl);
 				failed = 1;
+				goto start;
+			}
+			if(!strcasecmp("ZNAKI", buffer))
+			{
+				printf("ä ö ü ß\n");
 				goto start;
 			}
 
