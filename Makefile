@@ -10,4 +10,5 @@ $(PROJECT_NAME):
 	gcc $(files) -o nauka $(CFLAGS)
 
 run: $(PROJECT_NAME)
+	clear
 	./$(PROJECT_NAME)
