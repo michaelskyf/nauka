@@ -112,9 +112,9 @@ start:
 
 		if(strcmp(w, buffer))
 		{
-			if(!strcmp("STOP", buffer))
+			if(!strcasecmp("STOP", buffer))
 				return -1;
-			if(!strcmp("HELP", buffer))
+			if(!strcasecmp("HELP", buffer))
 			{
 				printf("%s %s %s %s\n", array[index].x, array[index].y, array[index].z, array[index].pl);
 				failed = 1;
