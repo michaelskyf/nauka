@@ -64,7 +64,7 @@ int random_word(void)
 {
 	size_t index = random() % asize;
 	short word = random() % 4;
-	char *w;
+	char *w = NULL;
 	char buffer[1024];
 	int failed = 0;
 
